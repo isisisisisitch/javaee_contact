@@ -13,6 +13,8 @@ public interface UserService {
 
    public void delUser(String id);
 
+    public void delSelected(String[] ids) ;
+
     public User findUserById(int id);
 
     public void updateUserInfo(User user);

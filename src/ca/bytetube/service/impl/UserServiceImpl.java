@@ -25,6 +25,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delSelected(String[] ids) {
+        for(String i : ids){
+            delUser(i);
+        }
+
+    }
+
+    @Override
     public User findUserById(int id) {
         return userDao.findUserById(id);
     }
