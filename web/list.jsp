@@ -34,14 +34,59 @@
             }
         }
 
+        window.onload = function () {
+            //1.需要给"delete selected"增加一个单击事件
+            document.getElementById("deleteSelected").onclick = function () {
+                if (confirm("delete?")){
+                    //分2个情况
+                    var flag = false;
+                    var cbs = document.getElementsByName("uid");
+                    for (var i = 0; i < cbs.length;i++){
+                        if (cbs[i].checked){
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    //1.有items被选中
+                    if(flag == true){
+                        document.getElementById("delSelectedForm").submit();
+                    }
+
+                    //2.没有items被选中
+
+                }
+            }
+
+            //1.获取firstCb，
+            document.getElementById("firstCb").onclick=function () {
+                //2.绑定单击事件，获取form中所有的sub cbs
+                var cbs = document.getElementsByName("uid");
+                //3.循环遍历所有的sub cbs，将它们的状态置为checked
+                for (var i = 0; i < cbs.length;i++){
+                    cbs[i].checked = this.checked;
+                }
+            }
+
+
+        }
+
 
     </script>
 </head>
 <body>
 <div class="container">
     <h3 style="text-align: center">user list info</h3>
+    <div style="float: right;margin:6px">
+        <a class="btn btn-primary" href="add.jsp">add contact</a>
+        <a class="btn btn-primary" href="javascript:void(0);" id="deleteSelected">delete selected</a>
+    </div>
+
+
+    <form id="delSelectedForm" action="${pageContext.request.contextPath}/DeleteSelectedServlet" method="post">
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
+            <th><input type="checkbox" id="firstCb"></th>
             <th>id</th>
             <th>name</th>
             <th>sex</th>
@@ -53,6 +98,7 @@
         </tr>
        <c:forEach items="${users}" var="user" varStatus="s">
            <tr>
+               <td><input type="checkbox" name="uid" value="${user.id}"></td>
                <td>${s.count}</td>
                <td>${user.name}</td>
                <td>${user.sex}</td>
@@ -66,10 +112,10 @@
        </c:forEach>
 
 
-        <tr>
-            <td colspan="8" align="center"><a class="btn btn-primary" href="add.jsp">add contact</a></td>
-        </tr>
+
     </table>
+
+    </form>
 </div>
 </body>
 </html>

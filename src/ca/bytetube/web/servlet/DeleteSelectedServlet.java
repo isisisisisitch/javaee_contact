@@ -14,9 +14,11 @@ import java.io.IOException;
 public class DeleteSelectedServlet extends HttpServlet {
     UserService service=new UserServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String[] ids = request.getParameterValues("id");
+        String[] ids = request.getParameterValues("uid");
+        System.out.println(ids);
         service.delSelected(ids);
         response.sendRedirect(request.getContextPath()+"/UserLIstServlet");
+        System.out.println("DeleteSelectedServlet");
 
     }
 
