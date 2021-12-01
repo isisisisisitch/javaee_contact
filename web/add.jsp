@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label for="address">address：</label>
-            <select name="address" class="form-control" id="jiguan">
+            <select name="address" class="form-control" id="address">
                 <option value="trt">trt</option>
                 <option value="van">van</option>
                 <option value="mtl">mtl</option>

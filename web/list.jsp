@@ -77,6 +77,29 @@
 <body>
 <div class="container">
     <h3 style="text-align: center">user list info</h3>
+
+    <div style="float: left;">
+
+        <form class="form-inline" action="${pageContext.request.contextPath}/findUserByPageServlet" method="post">
+            <div class="form-group">
+                <label for="exampleInputName2">name</label>
+                <input type="text" name="name" value="${condition.name[0]}" class="form-control" id="exampleInputName2" >
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName3">address</label>
+                <input type="text" name="address" value="${condition.address[0]}" class="form-control" id="exampleInputName3" >
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail2">email</label>
+                <input type="text" name="email" value="${condition.email[0]}" class="form-control" id="exampleInputEmail2"  >
+            </div>
+            <button type="submit" class="btn btn-primary">search</button>
+        </form>
+
+    </div>
+
+
     <div style="float: right;margin:6px">
         <a class="btn btn-primary" href="add.jsp">add contact</a>
         <a class="btn btn-primary" href="javascript:void(0);" id="deleteSelected">delete selected</a>
@@ -96,7 +119,7 @@
             <th>email</th>
             <th>operation</th>
         </tr>
-       <c:forEach items="${users}" var="user" varStatus="s">
+       <c:forEach items="${pb.list}" var="user" varStatus="s">
            <tr>
                <td><input type="checkbox" name="uid" value="${user.id}"></td>
                <td>${s.count}</td>
@@ -110,12 +133,47 @@
                    <a class="btn btn-default btn-sm" href="javascript:delUser(${user.id});">del</a></td>
            </tr>
        </c:forEach>
-
-
-
     </table>
-
     </form>
+
+
+    <div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+
+                <c:if test="${pb.currentPage == 1}">
+                <li class="disabled">
+                    </c:if>
+
+                    <c:if test="${pb.currentPage != 1}">
+                <li>
+                    </c:if>
+
+                        <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <c:forEach begin="1" end="${pb.totalPage}" var="i">
+                    <c:if test="${pb.currentPage == i}">
+                        <li class="active"><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                    </c:if>
+
+                    <c:if test="${pb.currentPage != i}">
+                        <li><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                    </c:if>
+                </c:forEach>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <span style="font-size: 25px;margin-left: 5px;">
+                    ${pb.totalCount} records, ${pb.totalPage} pages
+                </span>
+            </ul>
+        </nav>
+    </div>
 </div>
 </body>
 </html>

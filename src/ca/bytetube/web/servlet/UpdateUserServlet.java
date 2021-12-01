@@ -28,7 +28,7 @@ public class UpdateUserServlet extends HttpServlet {
             e.printStackTrace();
         }
         service.updateUserInfo(user);
-        response.sendRedirect(request.getContextPath()+"/UserLIstServlet");
+        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet");
 
 
     }

@@ -3,6 +3,7 @@ package ca.bytetube.dao;
 import ca.bytetube.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserDao {
 
@@ -15,4 +16,8 @@ public interface UserDao {
     public User findUserById(int id);
 
     public void updateUserInfo(User user);
+
+    int findTotalCount(Map<String, String[]> condition);
+
+    List<User> findByPage(int start, int rows, Map<String, String[]> condition);
 }

@@ -19,7 +19,7 @@
 <body>
 <div align="center">
   <a
-          href="${pageContext.request.contextPath}/UserLIstServlet" style="text-decoration:none;font-size:33px"> Query all users info
+          href="${pageContext.request.contextPath}/findUserByPageServlet" style="text-decoration:none;font-size:33px"> Query all users info
   </a>
 </div>
 </body>

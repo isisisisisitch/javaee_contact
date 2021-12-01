@@ -17,7 +17,7 @@ public class DeleteSelectedServlet extends HttpServlet {
         String[] ids = request.getParameterValues("uid");
         System.out.println(ids);
         service.delSelected(ids);
-        response.sendRedirect(request.getContextPath()+"/UserLIstServlet");
+        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet");
         System.out.println("DeleteSelectedServlet");
 
     }
