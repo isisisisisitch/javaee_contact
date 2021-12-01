@@ -18,6 +18,9 @@ import java.util.Map;
 public class UpdateUserServlet extends HttpServlet {
     UserService service = new UserServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String currentPage = (String)request.getSession().getAttribute("currentPage");
+
+        System.out.println("UpdateUserServlet_currentPage:"+currentPage);
         Map<String, String[]> map = request.getParameterMap();
         User user = new User();
         try {
@@ -28,7 +31,7 @@ public class UpdateUserServlet extends HttpServlet {
             e.printStackTrace();
         }
         service.updateUserInfo(user);
-        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet");
+        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet?currentPage="+currentPage);
 
 
     }

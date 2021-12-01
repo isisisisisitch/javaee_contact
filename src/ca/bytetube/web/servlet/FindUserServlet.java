@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/FindUserServlet")
@@ -18,12 +19,17 @@ public class FindUserServlet extends HttpServlet {
         //1.获取用户id
         String id = request.getParameter("id");
         System.out.println("id: "+ id);
+
+        String currentPage = request.getParameter("currentPage");
+        System.out.println("FindUserServlet_currentPage: "+ currentPage);
+
         //2.调用service方法
         User user = service.findUserById(Integer.parseInt(id));
 
         //3.将user存入request域中
         request.setAttribute("user",user);
-
+        HttpSession session = request.getSession();
+        session.setAttribute("currentPage",currentPage);
         //4.转发到update.jsp页面中
         request.getRequestDispatcher("/update.jsp").forward(request,response);
     }
