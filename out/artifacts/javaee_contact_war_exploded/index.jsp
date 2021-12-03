@@ -15,12 +15,43 @@
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
   </script>
+
+  <script>
+    /*
+    * 需求：点击图片或者超链接可以更新一张新的验证码
+    * 1.给图片或者超链接绑定点击事件
+    * 2.当事件发生后，更新图片,重新设置src属性值
+    */
+
+    window.onload = function () {
+      //1.通过id属性获取图片对象
+      var img = document.getElementById("checkcode");
+
+      //2.绑定图片对象的点击事件
+      img.onclick = function () {
+        var time = new Date().getTime();//时间戳
+        img.src = "${pageContext.request.contextPath}/CheckCodeServlet?"+time;
+      }
+    }
+
+  </script>
 </head>
 <body>
 <div align="center">
-  <a
-          href="${pageContext.request.contextPath}/findUserByPageServlet" style="text-decoration:none;font-size:33px"> Query all users info
-  </a>
+
+  <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
+    username:<input type="text" name="username"> <br>
+    password:<input type="text" name="password"> <br>
+    checkcode:<input type="text" name="checkCode"><br>
+    <img id="checkcode"  src="${pageContext.request.contextPath}/CheckCodeServlet"><br>
+
+    <input type="submit" value="login">
+
+
+  </form>
+  <div style="color: red"> ${cc_error}</div>
+  <div style="color: red"> <%= request.getAttribute("login_error") == null ? "" : request.getAttribute("login_error")%> </div>
+
 </div>
 </body>
 </html>

@@ -1,8 +1,10 @@
 package ca.bytetube.dao.impl;
 
 import ca.bytetube.dao.UserDao;
+import ca.bytetube.domain.Admin;
 import ca.bytetube.domain.User;
 import ca.bytetube.utils.JDBCUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 
 public class UserDaoImpl implements UserDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+
 
 
     @Override
@@ -116,5 +119,21 @@ public class UserDaoImpl implements UserDao {
         System.out.println(params);
 
         return template.query(sql,new BeanPropertyRowMapper<User>(User.class),params.toArray());
+    }
+
+    @Override
+    public Admin adminLogin(Admin admin) {
+        try{
+            //1.编写sql
+            String sql = "SELECT * FROM admin WHERE username = ? and password = ? ";
+            //2.调用sql
+            Admin loginAdmin = template.queryForObject(sql, new BeanPropertyRowMapper<>(Admin.class),
+                    admin.getUsername(), admin.getPassword());
+
+            return loginAdmin;
+        }catch (DataAccessException e){
+
+            return null;
+        }
     }
 }

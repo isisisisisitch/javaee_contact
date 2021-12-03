@@ -129,7 +129,9 @@
                <td>${user.address}</td>
                <td>${user.facebook}</td>
                <td>${user.email}</td>
-               <td><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/FindUserServlet?id=${user.id}&currentPage=${pb.currentPage}">modify</a>&nbsp;
+               <td><a class="btn btn-default btn-sm"
+                      href="${pageContext.request.contextPath}/FindUserServlet?id=${user.id}&currentPage=${pb.currentPage}">modify</a>&nbsp;
+
                    <a class="btn btn-default btn-sm" href="javascript:delUser(${user.id});">del</a></td>
            </tr>
        </c:forEach>

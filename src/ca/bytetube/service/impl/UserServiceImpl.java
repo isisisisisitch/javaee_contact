@@ -3,6 +3,7 @@ package ca.bytetube.service.impl;
 
 import ca.bytetube.dao.UserDao;
 import ca.bytetube.dao.impl.UserDaoImpl;
+import ca.bytetube.domain.Admin;
 import ca.bytetube.domain.PageBean;
 import ca.bytetube.domain.User;
 import ca.bytetube.service.UserService;
@@ -12,6 +13,9 @@ import java.util.Map;
 
 public class UserServiceImpl implements UserService {
     UserDao userDao = new UserDaoImpl();
+
+
+
     @Override
     public List<User> findAll() {
         return userDao.findAll();
@@ -43,6 +47,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserInfo(User user) {
         userDao.updateUserInfo(user);
+    }
+
+    @Override
+    public Admin adminLogin(Admin admin) {
+        return userDao.adminLogin(admin);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ca.bytetube.service;
 
+import ca.bytetube.domain.Admin;
 import ca.bytetube.domain.PageBean;
 import ca.bytetube.domain.User;
 
@@ -20,6 +21,8 @@ public interface UserService {
     public User findUserById(int id);
 
     public void updateUserInfo(User user);
+
+    public Admin adminLogin(Admin admin);
 
 
     PageBean<User> findUserByPage(String currentPage, String rows, Map<String, String[]> condition);
